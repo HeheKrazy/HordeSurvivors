@@ -14,4 +14,9 @@ class HORDESURVIVORS_API AHKCharacter : public AHKCharacterBase
 {
 	GENERATED_BODY()
 	
+public:
+	AHKCharacter();
+	
+private:
+	
 };
