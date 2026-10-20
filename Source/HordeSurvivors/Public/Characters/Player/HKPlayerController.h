@@ -8,6 +8,7 @@
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class IHighlightInterface;
 /**
  * 
  */
@@ -17,6 +18,7 @@ class HORDESURVIVORS_API AHKPlayerController : public APlayerController
 	GENERATED_BODY()
 public:
 	AHKPlayerController();	
+	virtual void PlayerTick(float DeltaTime) override;
 	
 protected:
 	virtual void BeginPlay() override;
@@ -31,7 +33,10 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 	
 	void Move(const FInputActionValue& InputActionValue);
+	void CursorTrace();
 	
+	TScriptInterface<IHighlightInterface> LastActor;
+	TScriptInterface<IHighlightInterface> ThisActor;
 	
 };
 
