@@ -16,6 +16,7 @@ class HORDESURVIVORS_API AHKEnemy : public AHKCharacterBase, public IHighlightIn
 	GENERATED_BODY()
 	
 public:
+	AHKEnemy();
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
 	
