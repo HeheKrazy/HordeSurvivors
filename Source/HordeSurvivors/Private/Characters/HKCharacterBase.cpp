@@ -12,6 +12,16 @@ AHKCharacterBase::AHKCharacterBase()
 
 }
 
+UAbilitySystemComponent* AHKCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
+UAttributeSet* AHKCharacterBase::GetAttributeSet() const
+{
+	return AttributeSet;
+}
+
 void AHKCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
