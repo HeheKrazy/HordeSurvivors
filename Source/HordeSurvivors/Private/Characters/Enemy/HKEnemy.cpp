@@ -34,3 +34,11 @@ void AHKEnemy::UnHighlightActor()
 	Weapon->SetRenderCustomDepth(false);
 	
 }
+
+void AHKEnemy::BeginPlay()
+{
+	Super::BeginPlay();
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	
+}
+

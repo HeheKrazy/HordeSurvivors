@@ -3,6 +3,8 @@
 
 #include "Characters/Player/HKCharacter.h"
 
+#include "AbilitySystemComponent.h"
+#include "Characters/Player/HKPlayerState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 AHKCharacter::AHKCharacter()
@@ -15,4 +17,30 @@ AHKCharacter::AHKCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
+}
+
+void AHKCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	
+	// Initialize the Ability System Component on the server
+	InitAbilityActorInfo();
+}
+
+void AHKCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	
+	// Initialize the Ability System Component on the client
+	InitAbilityActorInfo();
+	
+}
+
+void AHKCharacter::InitAbilityActorInfo()
+{
+	AHKPlayerState* HKPlayerState = GetPlayerState<AHKPlayerState>();
+	check(HKPlayerState);
+	HKPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(HKPlayerState, this);
+	AbilitySystemComponent = HKPlayerState->GetAbilitySystemComponent();
+	AttributeSet = HKPlayerState->GetAttributeSet();
 }

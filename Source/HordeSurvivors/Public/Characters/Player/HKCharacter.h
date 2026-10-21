@@ -17,6 +17,9 @@ class HORDESURVIVORS_API AHKCharacter : public AHKCharacterBase
 public:
 	AHKCharacter();
 	
-private:
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
 	
+private:
+	void InitAbilityActorInfo();
 };
