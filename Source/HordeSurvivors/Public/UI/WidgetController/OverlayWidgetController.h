@@ -18,11 +18,16 @@ class HORDESURVIVORS_API UOverlayWidgetController : public UHKWidgetController
 	GENERATED_BODY()
 	
 public:
-	virtual void BroadcastInitialValues();
-	
+	virtual void BroadcastInitialValues() override;
+	virtual void BindCallbackToDependencies() override;
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 	FOnHealthChangedSignature OnHealthChanged;
 	
 	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
 	FOnMaxHealthChangedSignature OnMaxHealthChanged;
+	
+protected:
+	
+	void HealthChanged(const FOnAttributeChangeData& Data);
+	void MaxHealthChanged(const FOnAttributeChangeData& Data);
 };

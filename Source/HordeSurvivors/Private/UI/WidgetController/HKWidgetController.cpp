@@ -14,3 +14,7 @@ void UHKWidgetController::SetWidgetControllerParams(const FWidgetControllerParam
 void UHKWidgetController::BroadcastInitialValues()
 {
 }
+
+void UHKWidgetController::BindCallbackToDependencies()
+{
+}
