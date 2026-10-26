@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "HKEffectActor.generated.h"
-class USphereComponent;
+class UGameplayEffect;
 
 UCLASS()
 class HORDESURVIVORS_API AHKEffectActor : public AActor
@@ -14,16 +14,15 @@ class HORDESURVIVORS_API AHKEffectActor : public AActor
 	
 public:	
 	AHKEffectActor();
-	
-	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	virtual void EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 protected:
 	virtual void BeginPlay() override;
 	
-private:
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USphereComponent> Sphere;
+	UFUNCTION(BlueprintCallable)
+	void ApplyGameplayEffectToTarger(AActor* Target, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 	
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UStaticMeshComponent> Mesh;
+	TSubclassOf<UGameplayEffect> InstantGameplayEffect;
+	
+private:
+
 };
