@@ -35,10 +35,12 @@ void UOverlayWidgetController::BindCallbackToDependencies()
 	{
 		for (const FGameplayTag& Tag : AssetTags)
 		{
-			const FString Msg = FString::Printf(TEXT("Gameplay Effect Applied with Tag: %s"), *Tag.ToString());
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, Msg);
-			
-			FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+			FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName("Message"));
+			if (Tag.MatchesTag(MessageTag))
+			{
+				const FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+				MessageWidgetRowDelegate.Broadcast(*Row);
+			}
 		}
 	}	
 	);
