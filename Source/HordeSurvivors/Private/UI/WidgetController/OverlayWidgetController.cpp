@@ -2,6 +2,8 @@
 
 
 #include "UI/WidgetController/OverlayWidgetController.h"
+
+#include "AbilitySystem/HKAbilitySystemComponent.h"
 #include "AbilitySystem/HKAttributeSet.h"
 
 void UOverlayWidgetController::BroadcastInitialValues()
@@ -27,6 +29,16 @@ void UOverlayWidgetController::BindCallbackToDependencies()
 	//Max Health Change Delegate
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
 		HKAttributeSet->GetMaxHealthAttribute()).AddUObject(this, &UOverlayWidgetController::MaxHealthChanged);
+	
+	Cast<UHKAbilitySystemComponent>(AbilitySystemComponent)->EffectAssetTags.AddLambda(
+	[](const FGameplayTagContainer& AssetTags)
+	{
+		for (const FGameplayTag& Tag : AssetTags)
+		{
+			
+		}
+	}	
+	);
 }
 
 void UOverlayWidgetController::HealthChanged(const FOnAttributeChangeData& Data)

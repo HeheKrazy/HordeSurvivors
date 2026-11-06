@@ -4,6 +4,7 @@
 #include "Characters/Player/HKCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/HKAbilitySystemComponent.h"
 #include "Characters/Player/HKPlayerController.h"
 #include "Characters/Player/HKPlayerState.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -43,6 +44,8 @@ void AHKCharacter::InitAbilityActorInfo()
 	AHKPlayerState* HKPlayerState = GetPlayerState<AHKPlayerState>();
 	check(HKPlayerState);
 	HKPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(HKPlayerState, this);
+	Cast<UHKAbilitySystemComponent>(HKPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
+	
 	AbilitySystemComponent = HKPlayerState->GetAbilitySystemComponent();
 	AttributeSet = HKPlayerState->GetAttributeSet();
 	

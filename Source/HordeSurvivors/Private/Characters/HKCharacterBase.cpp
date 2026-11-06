@@ -28,4 +28,8 @@ void AHKCharacterBase::BeginPlay()
 	
 }
 
+void AHKCharacterBase::InitAbilityActorInfo()
+{
+}
+
 

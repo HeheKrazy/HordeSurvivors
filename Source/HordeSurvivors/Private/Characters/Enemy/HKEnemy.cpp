@@ -38,7 +38,14 @@ void AHKEnemy::UnHighlightActor()
 void AHKEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	InitAbilityActorInfo();
 	
+	
+}
+
+void AHKEnemy::InitAbilityActorInfo()
+{
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<UHKAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 }
 
