@@ -31,11 +31,14 @@ void UOverlayWidgetController::BindCallbackToDependencies()
 		HKAttributeSet->GetMaxHealthAttribute()).AddUObject(this, &UOverlayWidgetController::MaxHealthChanged);
 	
 	Cast<UHKAbilitySystemComponent>(AbilitySystemComponent)->EffectAssetTags.AddLambda(
-	[](const FGameplayTagContainer& AssetTags)
+	[this](const FGameplayTagContainer& AssetTags)
 	{
 		for (const FGameplayTag& Tag : AssetTags)
 		{
+			const FString Msg = FString::Printf(TEXT("Gameplay Effect Applied with Tag: %s"), *Tag.ToString());
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, Msg);
 			
+			FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
 		}
 	}	
 	);
